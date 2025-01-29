@@ -1,0 +1,7 @@
+{
+"type": "FeatureCollection",
+"name": "other_relations",
+"features": [
+{ "type": "Feature", "properties": { "osm_id": "4525427", "name": "Kings Park", "type": "public_transport", "other_tags": "\"network\"=>\"LIRR\",\"operator\"=>\"LIRR\",\"public_transport\"=>\"stop_area\",\"railway\"=>\"facility\"" }, "geometry": { "type": "GeometryCollection", "geometries": [ { "type": "LineString", "coordinates": [ [ -73.2580691, 40.8835355 ], [ -73.2561257, 40.8836193 ], [ -73.2558401, 40.8836316 ], [ -73.2546433, 40.8836832 ], [ -73.2543976, 40.8836938 ] ] }, { "type": "LineString", "coordinates": [ [ -73.2581542, 40.8836284 ], [ -73.2561284, 40.8837115 ], [ -73.2558629, 40.8837224 ], [ -73.2544836, 40.883779 ] ] } ] } }
+]
+}

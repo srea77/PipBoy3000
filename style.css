@@ -1,0 +1,78 @@
+/* A container that simulates a Pip-Boy 3000 CRT-style screen */
+.crt-screen {
+    /* Fill the viewport (optional, can use any width/height) */
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+  
+    /* Dark base color behind the stripes */
+    background-color: #001100;
+  
+    /* Repeating linear gradient to create the scan lines */
+    background-image: repeating-linear-gradient(
+      to bottom,
+      /* First stripe color */
+      #0b3d0b 0px,
+      #0b3d0b 2px,
+      /* Second stripe (slightly darker or blackish) */
+      #001100 2px,
+      #001100 4px
+    );
+  
+    /* This gives a slight “breathing/flicker” effect */
+    animation: crt-flicker 12s infinite;
+  }
+  
+  /* OPTIONAL: Adds a faint glow/haze on top (like a CRT bloom). */
+  .crt-screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    
+    /* Subtle radial glow in the center */
+    background: radial-gradient(
+      circle at center, 
+      rgba(0, 255, 0, 0.07) 0%, 
+      rgba(0, 255, 0, 0) 60%
+    );
+    
+    /* Let green glow layer blend with stripes below */
+    mix-blend-mode: screen;
+  }
+  
+  /* Keyframes for the flicker/breathing brightness animation */
+  @keyframes crt-flicker {
+    0%, 100% {
+      filter: brightness(1);
+    }
+    10% {
+      filter: brightness(1.78);
+    }
+    20% {
+      filter: brightness(3.22);
+    }
+    30% {
+      filter: brightness(5);
+    }
+    40% {
+      filter: brightness(1.65);
+    }
+    50% {
+      filter: brightness(1);
+    }
+    60% {
+      filter: brightness(1.28);
+    }
+    70% {
+      filter: brightness(1);
+    }
+    80% {
+      filter: brightness(0.96);
+    }
+    90% {
+      filter: brightness(1.04);
+    }
+  }
+  

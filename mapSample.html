@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>My Website</title>
+    <link rel="prefetch" href="./MapData/">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  </head>
+
+  <body>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <div id="my-map" style="width: 100%; height: 500px;"></div>
+    <script>
+      var map = L.map('my-map').setView([40.8872823560607, -73.2546676355822], 18);
+      // var mapLayer1 = L.geoJSON("./MapData/multipolygons.geojson").addTo(map);
+
+            // Add a tile layer (required for the map to render)
+      L.tileLayer('./MapData/mapBackground.png', {
+        maxZoom: 19,
+      }).addTo(map);
+
+
+      for (const element of ["MapData/lines.geojson", "MapData/multilinestrings.geojson", " MapData/multipolygons.geojson",  "MapData/other_relations.geojson"]) {
+        fetch(element)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(geojsonData => {
+          // Add GeoJSON data to the map
+          L.geoJSON(geojsonData, {
+            color: '#4fe681',
+            opacity: 0.5
+
+
+          }).addTo(map);
+        })
+        .catch(error => {
+          console.error('Error loading GeoJSON:', error);
+        });        
+      }
+
+
+      var UserMarkerIcon = L.icon({
+          iconUrl: 'MapData/userMarker.png',
+          iconSize: [80,80],
+
+      });
+      
+
+      userLocMarker = L.marker([40.8872823560607, -73.2546676355822], {icon: UserMarkerIcon});
+      userLocMarker.bindPopup()
+      userLocMarker.addTo(map);
+
+
+    </script>
+    
+  </body>
+</html>
