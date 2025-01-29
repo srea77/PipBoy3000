@@ -13,15 +13,15 @@
     background-image: repeating-linear-gradient(
       to bottom,
       /* First stripe color */
-      #0b3d0b 0px,
-      #0b3d0b 2px,
+      #062406 0px,
+      #031403 1px,
       /* Second stripe (slightly darker or blackish) */
-      #001100 2px,
-      #001100 4px
+      #001100 1px,
+      #001100 2px
     );
   
     /* This gives a slight “breathing/flicker” effect */
-    animation: crt-flicker 12s infinite;
+    animation: crt-flicker 0.03s infinite;
   }
   
   /* OPTIONAL: Adds a faint glow/haze on top (like a CRT bloom). */
@@ -48,31 +48,64 @@
       filter: brightness(1);
     }
     10% {
-      filter: brightness(1.78);
+      filter: brightness(1.02);
     }
     20% {
-      filter: brightness(3.22);
+      filter: brightness(1.05);
     }
     30% {
-      filter: brightness(5);
+      filter: brightness(1.03);
     }
     40% {
-      filter: brightness(1.65);
+      filter: brightness(1.05);
     }
     50% {
-      filter: brightness(1);
+      filter: brightness(1.02);
     }
     60% {
-      filter: brightness(1.28);
+      filter: brightness(1.04);
     }
     70% {
-      filter: brightness(1);
+      filter: brightness(1.06);
     }
     80% {
-      filter: brightness(0.96);
+      filter: brightness(1.03);
     }
     90% {
-      filter: brightness(1.04);
+      filter: brightness(1.01);
     }
   }
   
+
+  .pb-text-default > *{
+    color: rgb(26, 185, 26);
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+  }
+
+  div.headers {
+    margin: 0 auto;
+    display: block;
+  }
+  .headers button {
+    color: rgb(26, 185, 26);
+    border: none;
+    background-color: transparent;
+    margin: 0 10px;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  .headers button.active {
+    color: rgb(26, 185, 26);
+    border: 2px solid rgb(26, 185, 26);
+    background-color: transparent;
+  }
+
+  .headers button:hover {
+    color: rgb(26, 185, 26);
+    border: 2px;
+    border: 2px solid rgb(26, 185, 26);
+    background-color: transparent;
+  }

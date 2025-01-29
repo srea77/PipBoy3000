@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" class="crt-screen">
+  <head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>My Website</title>
+    <link rel="prefetch" href="./MapData/">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+
+  <body>
+    <div class="pb-text-default" style="font-weight: bold; font-size: large;" id="data-section-top-border">
+      <div>
+        <b style="float: left;"> ——— DATA ———</b>
+        <b style="float: right;">———</b>
+      </div>
+      <br>
+      <div>
+        <b style="float: left;">|</b>
+        <b style="float: right;">| </b><b style="float:right; margin-right: 200px;">Kings Park</b>
+      </div>
+    </div>
+    <br>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <div id="my-map" style="width: 90%; height: 360px; margin: auto auto;"></div>
+    <script>
+      var map = L.map('my-map').setView([40.8872823560607, -73.2546676355822], 17);
+      // var mapLayer1 = L.geoJSON("./MapData/multipolygons.geojson").addTo(map);
+
+            // Add a tile layer (required for the map to render)
+      L.tileLayer('./MapData/mapBackground.png', {
+        minZoom: 15,
+        maxZoom: 19,
+      }).addTo(map);
+
+
+      for (const element of ["MapData/lines.geojson", "MapData/multilinestrings.geojson", " MapData/multipolygons.geojson",  "MapData/other_relations.geojson"]) {
+        fetch(element)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(geojsonData => {
+          // Add GeoJSON data to the map
+          L.geoJSON(geojsonData, {
+            color: '#4fe681',
+            opacity: 0.5
+
+
+          }).addTo(map);
+        })
+        .catch(error => {
+          console.error('Error loading GeoJSON:', error);
+        });        
+      }
+
+
+      var UserMarkerIcon = L.icon({
+          iconUrl: 'MapData/userMarker.png',
+          iconSize: [80,80],
+
+      });
+      
+
+      userLocMarker = L.marker([40.8872823560607, -73.2546676355822], {icon: UserMarkerIcon});
+      userLocMarker.bindPopup()
+      userLocMarker.addTo(map);
+
+
+    </script>
+    <br>
+
+    <div class="pb-text-default" id="data-section-headers">
+      <div class="headers">
+        <div style="font-weight: bold; font-size: large;">
+          |
+          <div style="float: right;">|</div>
+        </div>
+        <div>
+          |
+          ———<button class="active">Local Map</button>————<button>World Map</button>————<button>Quests</button>————<button>Misc</button>————<button>Radio</button>———<div style="float: right;">
+          |
+          </div>
+        </div>        
+      </div>
+
+
+    </div>
+
+  </body>
+</html>
